@@ -8,8 +8,7 @@ $server_clients_max = 100;
 //Do not modify these variables.
 $server_clients = 0;
 
-//Functions for starting, stopping, and sending data to the various clients as well as logging.
-//Other functions have been added.
+//Various server functions
 
 function server_start($bindaddr, $port)
 {
@@ -51,7 +50,7 @@ function server_log($text, $date = FALSE)
 if (!$text)
 return;
 global $log_dir, $log_file;
-$text = trim($text) . "\r\n";
+$text = trim($text) . NL;
 if ($date)
 $text = "<" . date_h(time()) . ">  " . $text;
 $file = $log_dir . $log_file;
