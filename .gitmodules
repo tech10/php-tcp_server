@@ -1,0 +1,3 @@
+[submodule "core/classes/tcp_server"]
+	path = core/classes/tcp_server
+	url = ../php-tcp_server_class.git
