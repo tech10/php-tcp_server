@@ -6,7 +6,7 @@ define('DS', DIRECTORY_SEPARATOR);
 define('NL', PHP_EOL);
 $phpversion_req = '5.4';
 if (version_compare(phpversion(), $phpversion_req, '<'))
-die('You are currently running php version ' . phpversion() . ', and this script requires at least php version ' . $phpversion_req . NL);
+die('You are currently running php version ' . phpversion() . ", and this script requires at least php version $phpversion_req." . NL);
 $current_dir = __DIR__ . DS;
 chdir(__DIR__);
 
