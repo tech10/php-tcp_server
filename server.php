@@ -8,17 +8,16 @@ $phpversion_req = '5.4';
 if (version_compare(phpversion(), $phpversion_req, '<'))
 die('You are currently running php version ' . phpversion() . ', and this script requires at least php version ' . $phpversion_req . NL);
 $current_dir = __DIR__ . DS;
-chdir($current_dir);
+chdir(__DIR__);
+
+//Include needed files.
+require_once(__DIR__ . DS . "core" . DS . "bootstrap.php");
+
+//Define some useful variables.
 $user = get_current_user();
 $pid = getmypid();
 $bindaddr = '[::]';
 $port = 6000;
-
-//Include needed files.
-foreach (glob($current_dir . "includes" . DS . "*.php") as $inc_file)
-{
-require_once($inc_file);
-}
 
 $server_directory = $current_dir;
 $server_filename = __FILE__;
