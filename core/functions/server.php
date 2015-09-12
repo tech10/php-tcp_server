@@ -1,6 +1,6 @@
 <?php
 global $log_dir, $log_file, $server, $server_start_time;
-$log_dir = "./logs/";
+$log_dir = getcwd() . DS . "data" . DS;
 $log_file = "server.log";
 global $server_clients, $server_clients_max;
 $server_clients_max = 100;
