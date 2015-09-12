@@ -1,5 +1,2 @@
-# Ignore json files.
-*.json
-
-# Ignore log files.
-*.log
+# Ignore data directory.
+data/*
