@@ -8,7 +8,7 @@ Here is a brief example of how to run it on Linux.
 
 Change to the directory where you cloned the repository, then execute the following command.
 
-    ./server.php
+    php ./server.php
 
 By default, the server binds to all IPV4 and IPV6 addresses, and is available at port 6000. For help on the available commands within the server, type /help. To terminate the server, CTRL+C can be used. Look at ./core/functions/signal.php for more information on the Posix signals used to terminate the server and restart it.
 

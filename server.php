@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?php
 $load_start = microtime(true);
 declare(ticks=1);
