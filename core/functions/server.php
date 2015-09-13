@@ -150,6 +150,6 @@ return "Generic chat server";
 }
 function server_version()
 {
-return "0.1 Alpha1";
+return "0.1 Alpha2";
 }
 ?>
