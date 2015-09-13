@@ -13,7 +13,7 @@ $server_clients = 0;
 function server_start($bindaddr, $port)
 {
 global $server, $server_start_time;
-$server = new tcp_server($bindaddr, $port, "process_connect", "process_disconnect", "process_recv", 8192, "time_checks", 1);
+$server = new tcp_server_class($bindaddr, $port, "process_connect", "process_disconnect", "process_recv", 8192, "time_checks", 1);
 $server_start_time = microtime(true);
 return $server->start();
 }
