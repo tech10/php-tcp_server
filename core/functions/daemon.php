@@ -1,10 +1,11 @@
 <?php
-global $data_dir, $daemon;
+global $data_dir, $daemon, $daemon_pid_file;
 $daemon = false;
+$daemon_pid_file = $data_dir . "server.pid";
 
 function daemonize()
 {
-global $data_dir, $daemon;
+global $data_dir, $daemon, $daemon_pid_file;
 if (isset($daemon) && $daemon)
 return false;
 //These only work on posix systems with pcntl compiled in.
@@ -21,7 +22,7 @@ else if($pid)
 exit(0);
 }
 //Make this process the session leader, only if posix is available.
-//This will let us fork more if we want.
+//This will let us fork more if we want, and probably allows other things, too.
 if (function_exists("posix_setsid"))
 posix_setsid();
 $pid = getmypid();
@@ -34,7 +35,7 @@ fclose(STDOUT);
 fclose(STDERR);
 if (!file_exists($data_dir))
 mkdir($data_dir, 0750, TRUE);
-file_put_contents($data_dir . "server.pid", $pid);
+file_put_contents($daemon_pid_file, $pid);
 return $pid;
 }
 function is_daemon()

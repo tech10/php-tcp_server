@@ -2,7 +2,7 @@
 // signal handler function
 function sig_handler($signo)
 {
-global $server;
+global $server, $daemon_pid_file;
 switch ($signo)
 {
 case SIGHUP:
@@ -16,6 +16,8 @@ default:
 //Handle shutdown signals, since we're only registering those after restart signals.
 server_log("Shutting down server.", TRUE);
 $server->disconnect_all("Shutting down server.");
+if ($daemon_pid_file && file_exists($daemon_pid_file))
+unlink($daemon_pid_file);
 exit;
 break;
 }

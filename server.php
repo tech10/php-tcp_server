@@ -7,10 +7,13 @@ $phpversion_req = '5.4';
 if (version_compare(phpversion(), $phpversion_req, '<'))
 die('You are currently running php version ' . phpversion() . ", and this script requires at least php version $phpversion_req." . NL);
 $current_dir = __DIR__ . DS;
-chdir(__DIR__);
+chdir($current_dir);
 
 //Include needed files.
 require_once(__DIR__ . DS . "core" . DS . "bootstrap.php");
+
+//Daemonize on supported systems, will be configurable in the future.
+$daemon_status = daemonize();
 
 //Define some useful variables.
 $user = get_current_user();
@@ -24,6 +27,8 @@ server_log(server_name() . " version " . server_version() . ".", TRUE);
 server_log("Current working directory: " . getcwd());
 server_log("Running as user: $user.");
 server_log("Process ID: $pid.");
+if ($daemon_status)
+server_log("Currently running as a daemon.");
 
 $result = server_start($bindaddr, $port);
 if ($result === FALSE)
