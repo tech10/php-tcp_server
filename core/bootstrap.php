@@ -1,4 +1,8 @@
 <?php
+//Define some variables.
+global $data_dir;
+$data_dir = getcwd() . DS . "data" . DS;
+
 foreach (glob(__DIR__ . DS . "functions" . DS . "*.php") as $inc_file)
 {
 require_once($inc_file);

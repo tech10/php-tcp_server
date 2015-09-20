@@ -1,6 +1,5 @@
 <?php
-global $log_dir, $log_file, $server, $server_start_time;
-$log_dir = getcwd() . DS . "data" . DS;
+global $data_dir, $log_file, $server, $server_start_time;
 $log_file = "server.log";
 global $server_clients, $server_clients_max;
 $server_clients_max = 100;
@@ -49,16 +48,15 @@ function server_log($text, $date = FALSE)
 {
 if (!$text)
 return;
-global $log_dir, $log_file;
+global $data_dir, $log_file;
 $text = trim($text) . NL;
 if ($date)
 $text = "<" . date_h(time()) . ">  " . $text;
-$file = $log_dir . $log_file;
-if (!file_exists($log_dir))
-mkdir($log_dir, 0750, TRUE);
-if (!file_exists($file))
-touch($file);
+$file = $data_dir . $log_file;
+if (!file_exists($data_dir))
+mkdir($data_dir, 0750, TRUE);
 file_put_contents($file, $text, FILE_APPEND);
+if (!is_daemon())
 echo $text;
 return TRUE;
 }

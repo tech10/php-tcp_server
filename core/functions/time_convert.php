@@ -41,11 +41,10 @@ $seconds = 0;
 $vals = Array(1, 60, 3600, 86400);
 foreach($timeArr as $key => $value)
 {
-echo "Key: $key\r\nValue: $value\r\n";
- if(!isset($vals[$key]))
+if(!isset($vals[$key]))
 break;
- $seconds += $value * $vals[$key];
+$seconds += $value * $vals[$key];
 }
- return $seconds;
+return $seconds;
 }
 ?>
