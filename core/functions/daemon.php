@@ -33,8 +33,6 @@ $daemon = true;
 fclose(STDIN);
 fclose(STDOUT);
 fclose(STDERR);
-if (!file_exists($data_dir))
-mkdir($data_dir, 0750, TRUE);
 file_put_contents($daemon_pid_file, $pid);
 return $pid;
 }

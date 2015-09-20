@@ -3,6 +3,10 @@
 global $data_dir;
 $data_dir = getcwd() . DS . "data" . DS;
 
+//Make sure the data directory doesn't exist and create it.
+if (!file_exists($data_dir))
+mkdir($data_dir, 0750, TRUE);
+
 foreach (glob(__DIR__ . DS . "functions" . DS . "*.php") as $inc_file)
 {
 require_once($inc_file);

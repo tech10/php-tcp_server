@@ -53,8 +53,6 @@ $text = trim($text) . NL;
 if ($date)
 $text = "<" . date_h(time()) . ">  " . $text;
 $file = $data_dir . $log_file;
-if (!file_exists($data_dir))
-mkdir($data_dir, 0750, TRUE);
 file_put_contents($file, $text, FILE_APPEND);
 if (!is_daemon())
 echo $text;
