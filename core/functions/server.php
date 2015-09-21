@@ -93,13 +93,12 @@ server_log($text, $date);
 return $server->send($socket, $text);
 }
 
-function server_restart($msg = "Server restarting. Localy initiated.")
+function server_restart($msg = "Server restarting. Locally initiated.")
 {
 global $argv, $server;
 server_log($msg, TRUE);
 $server->disconnect_all($msg);
 server_stop();
-/*
 //Can't quite get this to work.
 //It will properly restart, but won't intercept signals after this point.
 $cmd = PHP_BINARY . " " . implode(" ", $argv);
@@ -108,12 +107,13 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
 {
 pclose(popen("start /B $cmd > NUL", "r"));
 } else {
-exec("$cmd >/dev/null 2>&1 &");
+//Do nothing until we can fix the above bug.
+//Rely on the user to manually start the server again and send the appropriate HUP signal when killing for a restart.
+//exec("$cmd >/dev/null 2>&1 &");
 }
-*/
 exit;
 }
-function server_shutdown($msg = "Server shutdown. Localy initiated.")
+function server_shutdown($msg = "Server shutdown. Locally initiated.")
 {
 global $daemon_pid_file, $server;
 server_log($msg, TRUE);
