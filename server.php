@@ -1,6 +1,5 @@
 <?php
 $load_start = microtime(true);
-declare(ticks=1);
 define('DS', DIRECTORY_SEPARATOR);
 define('NL', PHP_EOL);
 $phpversion_req = '5.4';

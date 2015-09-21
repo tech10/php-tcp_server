@@ -41,6 +41,8 @@ return TRUE;
 function server_do_events()
 {
 global $server;
+if (function_exists("pcntl_signal_dispatch"));
+pcntl_signal_dispatch();
 return $server->do_events();
 }
 
@@ -93,22 +95,32 @@ return $server->send($socket, $text);
 
 function server_restart($msg = "Server restarting. Localy initiated.")
 {
-global $pid, $server, $server_filename, $server_directory;
-$server->disconnect_all($msg);
+global $argv, $server;
 server_log($msg, TRUE);
+$server->disconnect_all($msg);
 server_stop();
-sleep(1);
-$cmd = PHP_BINARY . " $server_filename";
-$output = "2>&1 > $server_directory/output.txt &";
-if (substr(php_uname(), 0, 7) == "Windows")
+/*
+//Can't quite get this to work.
+//It will properly restart, but won't intercept signals after this point.
+$cmd = PHP_BINARY . " " . implode(" ", $argv);
+//Windows.
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
 {
-pclose(popen("start /B " . $cmd, "r"));
+pclose(popen("start /B $cmd > NUL", "r"));
+} else {
+exec("$cmd >/dev/null 2>&1 &");
 }
-else
+*/
+exit;
+}
+function server_shutdown($msg = "Server shutdown. Localy initiated.")
 {
-//exec("$cmd $output");
-pclose(popen("kill -9 $pid; nohup $cmd $output", "r"));
-} 
+global $daemon_pid_file, $server;
+server_log($msg, TRUE);
+$server->disconnect_all($msg);
+server_stop();
+if ($daemon_pid_file && file_exists($daemon_pid_file))
+unlink($daemon_pid_file);
 exit;
 }
 
